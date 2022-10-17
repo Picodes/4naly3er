@@ -20,7 +20,7 @@ yarn analyze <PATH>
 
 ## Add new issues
 
-Issues can have the following form:
+To add an issue you can either create a simple regex using the `regex` field either use the more comprehensive `detector` form. The type is the following:
 
 ```js
 export type Issue = {
@@ -39,8 +39,6 @@ export type Issue = {
     fileContent: string,
   }[],
 };
-
-To add one you can either create a simple regex using the `regex` field either use the more comprehensive `detector` form.
 ```
 
 ## Credits
