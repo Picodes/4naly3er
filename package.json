@@ -1,0 +1,31 @@
+{
+  "name": "code4rena-report-generator",
+  "version": "1.0.0",
+  "description": "Static Solidity Analyzer",
+  "main": "index.ts",
+  "author": "picodes",
+  "license": "Unlicensed",
+  "private": true,
+  "scripts": {
+    "analyze": "ts-node index.ts"
+  },
+  "dependencies": {
+    "eslint": "^8.25.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-mocha-no-only": "1.1.1",
+    "eslint-plugin-mocha": "^10.0.3",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-standard": "5.0.0",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "@types/node": "^7.0.5",
+    "typescript": "^4.7.4",
+    "@typescript-eslint/eslint-plugin": "4.28.4",
+    "@typescript-eslint/parser": "4.28.4"
+  }
+}
