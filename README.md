@@ -44,6 +44,3 @@ export type Issue = {
 ## Credits
 
 https://github.com/byterocket/c4udit for the inspiration
-
-Issues forked from:
-https://github.com/code-423n4/2022-09-nouns-builder-findings/issues/336

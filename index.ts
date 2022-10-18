@@ -1,52 +1,13 @@
 import fs from 'fs';
-import issues, { InputType, Issue, issueTypes, Occurence } from './issues';
+import analyze from './analyze';
+import issues, { InputType, issueTypes } from './issues';
 
 // ================================= PARAMETERS ================================
 
 const contractFolder =
   process.argv.length > 2 ? (process.argv[2].endsWith('/') ? process.argv[2] : process.argv[2] + '/') : 'contracts/';
 const out = 'report.md';
-
-// ================================= FUNCTIONS =================================
-
-const analyze = (files: { content: string; name: string }[], issues: Issue[]): string => {
-  let result = '';
-  let counter = 0;
-  for (const issue of issues) {
-    let occurences: Occurence[] = [];
-    if (!!issue.regex) {
-      for (const file of files) {
-        for (const res of file.content.matchAll(issue.regex)) {
-          occurences.push({ fileName: file.name, index: res.index!, fileContent: res.input! });
-        }
-      }
-    } else if (!!issue.detector) {
-      occurences = issue.detector(files);
-    }
-
-    if (occurences.length > 0) {
-      result += `### [${issue.type}-${counter}] ${issue.title}\n`;
-      if (!!issue.impact) {
-        result += '\n#### Impact:\n';
-        result += `${issue.impact}\n`;
-      }
-      result += '\n#### Occurences:\n';
-      for (const o of occurences) {
-        let line;
-        if (!o.line) {
-          line = 1 + [...o.fileContent?.slice(0, o.index).matchAll(/\n/g)!].length;
-        } else {
-          line = o.line;
-        }
-        result += ` - ${o.fileName} line ${line}:\n ${'`'}${o.fileContent?.split('\n')[line - 1]}${'`'}\n`;
-      }
-      result += `\n`;
-      counter++;
-    }
-  }
-
-  return result;
-};
+const ignore = ['mock', 'interfaces', 'external'];
 
 // ============================== GENERATE REPORT ==============================
 
@@ -67,13 +28,21 @@ const main = async () => {
       }
     }
   }
+  // Remove ignored files
+  fileNames = fileNames.filter(n =>
+    ignore.reduce((prev, curr) => {
+      if (n.includes(curr)) return false;
+      return prev;
+    }, true),
+  );
+
+  // Uncomment next lines to have the list of analyzed files in the report
 
   result += '## Files analyzed\n\n';
   fileNames.forEach(fileName => {
     result += ` - ${fileName}\n`;
   });
 
-  result += '\n## Issues\n\n';
   const files: InputType = [];
   fileNames.forEach(fileName => {
     files.push({
