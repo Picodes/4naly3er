@@ -38,10 +38,10 @@ const main = async () => {
 
   // Uncomment next lines to have the list of analyzed files in the report
 
-  result += '## Files analyzed\n\n';
-  fileNames.forEach(fileName => {
-    result += ` - ${fileName}\n`;
-  });
+  // result += '## Files analyzed\n\n';
+  // fileNames.forEach(fileName => {
+  //   result += ` - ${fileName}\n`;
+  // });
 
   const files: InputType = [];
   fileNames.forEach(fileName => {
