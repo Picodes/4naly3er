@@ -39,6 +39,6 @@ export type ASTIssue = {
   title: string;
   impact?: string;
   description?: string;
-  detector: (files: InputType) => Instance[]; // Function analyzing the AST and outputin instances of the issue
+  detector: (files: InputType) => Instance[]; // Function analyzing the AST and returning instances of the issue
   regexOrAST: 'AST';
 };
