@@ -1,8 +1,21 @@
-<h1 align=center><code>Code4rena Report Generator</code></h1>
+<h1 align=center><code>4naly3er</code></h1>
 
 ## Introduction
 
-Code4rena report generator.
+Static solidity analyzer.
+
+## Usage
+
+```bash
+yarn analyze <BASE_PATH> <SCOPE_FILE>
+
+# Example
+yarn analyze contracts scope.example.txt
+```
+
+- `BASE_PATH` is a relative path to the folder containing the smart contracts.
+- `SCOPE_FILE` is an optional file containg a specific smart contracts scope (see [scope.example.txt](./scope.example.txt))
+- The output will be saved in a `report.md` file.
 
 ## Installation
 
@@ -10,17 +23,11 @@ Code4rena report generator.
 yarn
 ```
 
-## Usage
-
-You can either paste solidity files or folders in the contracts folder or indicate a path
-
-```bash
-yarn analyze <PATH>
-```
-
 ## Add new issues
 
-To add an issue you can either create a simple regex using the `regex` field either use the more comprehensive `detector` form. The type is the following:
+To add an issue you can either create a simple regex using the `regex` field either use the more comprehensive `detector` form.
+
+### Regex-based detector:
 
 ```js
 export type Issue = {
@@ -28,19 +35,7 @@ export type Issue = {
   title: string,
   impact?: string,
   regex?: RegExp,
-  detector?: (
-    files: {
-      content: string,
-      name: string,
-    }[],
-  ) => {
-    index: number,
-    fileName: string,
-    fileContent: string,
-  }[],
 };
 ```
 
-## Credits
-
-https://github.com/byterocket/c4udit for the inspiration
+### AST-based detector:

@@ -1,11 +1,21 @@
-import { Instance, Issue, issueTypesTitles } from './issues';
+import { InputType, Instance, Issue } from './types';
+import { lineFromIndex } from './utils';
 
-const analyze = (files: { content: string; name: string }[], issues: Issue[]): string => {
+const issueTypesTitles = {
+  GAS: 'Gas Optimizations',
+  NC: 'Non Critical Issues',
+  L: 'Low Issues',
+  M: 'Medium Issues',
+  H: 'High Issues',
+};
+
+const analyze = (files: InputType, issues: Issue[]): string => {
   let result = '';
   let analyze: { issue: Issue; instances: Instance[] }[] = [];
   for (const issue of issues) {
     let instances: Instance[] = [];
-    if (!!issue.regex) {
+    // If issue is a regex
+    if (issue.regexOrAST === 'Regex') {
       for (const file of files) {
         const matches: any = [...file.content.matchAll(issue.regex)];
         for (const res of matches) {
@@ -13,11 +23,15 @@ const analyze = (files: { content: string; name: string }[], issues: Issue[]): s
           const line = [...res.input?.slice(0, res.index).matchAll(/\n/g)!].length;
           const comments = [...res.input?.split('\n')[line].matchAll(/([ \t]*\/\/|[ \t]*\/\*|[ \t]*\*)/g)];
           if (comments.length === 0 || comments?.[0]?.index !== 0) {
-            instances.push({ fileName: file.name, index: res.index!, fileContent: res.input! });
+            let line = lineFromIndex(res.input, res.index);
+            let endLine = undefined;
+            if (!!issue.startLineModifier) line += issue.startLineModifier;
+            if (!!issue.endLineModifier) endLine = line + issue.endLineModifier;
+            instances.push({ fileName: file.name, line, endLine, fileContent: res.input! });
           }
         }
       }
-    } else if (!!issue.detector) {
+    } else {
       instances = issue.detector(files);
     }
     if (instances.length > 0) {
@@ -51,7 +65,7 @@ const analyze = (files: { content: string; name: string }[], issues: Issue[]): s
     for (const o of instances.sort((a, b) => {
       if (a.fileName < b.fileName) return -1;
       if (a.fileName > b.fileName) return 1;
-      return !!a.index && !!b.index && a.index < b.index ? -1 : 1;
+      return !!a.line && !!b.line && a.line < b.line ? -1 : 1;
     })) {
       if (o.fileName !== previousFileName) {
         if (previousFileName !== '') {
@@ -61,13 +75,16 @@ const analyze = (files: { content: string; name: string }[], issues: Issue[]): s
         previousFileName = o.fileName;
       }
 
-      let line;
-      if (!o.line) {
-        line = 1 + [...o.fileContent?.slice(0, o.index).matchAll(/\n/g)!].length;
-      } else {
-        line = o.line;
+      // Insert code snippet
+      const lineSplit = o.fileContent?.split('\n');
+      result += `\n${o.line}: ${lineSplit[o.line - 1]}\n`;
+      if (!!o.endLine) {
+        let currentLine = o.line + 1;
+        while (currentLine <= o.endLine) {
+          result += `\n${currentLine}: ${lineSplit[currentLine - 1]}\n`;
+          currentLine++;
+        }
       }
-      result += `\n${line}: ${o.fileContent?.split('\n')[line - 1]}\n`;
     }
     result += `\n${'```'}\n\n`;
   }
