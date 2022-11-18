@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import semver from 'semver';
 import type { SourceUnit } from 'solidity-ast';
+import { recursiveExploration } from './utils';
 
 const versions = Object.keys(require('../package.json').dependencies)
   .filter(s => s.startsWith('solc-'))
@@ -9,19 +10,20 @@ const versions = Object.keys(require('../package.json').dependencies)
   .sort(semver.compare)
   .reverse();
 
-const latest = versions[versions.length - 1];
-
 type ToCompile = { [file: string]: { content: string } };
 type Sources = { file: string; index: number; content: string; version: string; compiled: boolean; ast?: SourceUnit }[];
 
-const compile = async (version: string, toCompile: ToCompile) => {
+/***
+ * @notice Compiles `toCompile` with solc
+ * @param toCompile source files with content already loaded
+ */
+const compile = async (version: string, toCompile: ToCompile, basePath: string) => {
   const solc = require(`solc-${version}`);
 
   // version() returns something like '0.8.13+commit.abaa5c0e.Emscripten.clang'
   const [trueVersion] = solc.version().split('+');
 
   let output;
-
   if (trueVersion !== version) {
     output = {
       errors: [{ formattedMessage: `Package solc-${version} is actually solc@${trueVersion}` }],
@@ -36,6 +38,7 @@ const compile = async (version: string, toCompile: ToCompile) => {
             outputSelection: { '*': { '': ['ast'] } },
           },
         }),
+        { import: findImports(basePath) },
       ),
     );
   }
@@ -43,21 +46,68 @@ const compile = async (version: string, toCompile: ToCompile) => {
   return output;
 };
 
+/***
+ * @notice Reads and load an import file
+ */
+const findImports = (basePath: string) => {
+  const res = (relativePath: string) => {
+    /** 1 - import are stored in `node_modules` */
+    try {
+      const absolutePath = path.resolve(basePath, 'node_modules/', relativePath);
+      const source = fs.readFileSync(absolutePath, 'utf8');
+      return { contents: source };
+    } catch {}
+    try {
+      const absolutePath = path.resolve(basePath, '../node_modules/', relativePath);
+      const source = fs.readFileSync(absolutePath, 'utf8');
+      return { contents: source };
+    } catch {}
+    /** 2 - import are stored in `lib` */
+    try {
+      const absolutePath = path.resolve(basePath, 'lib', relativePath);
+      const source = fs.readFileSync(absolutePath, 'utf8');
+      return { contents: source };
+    } catch {}
+    try {
+      const absolutePath = path.resolve(basePath, '../lib', relativePath);
+      const source = fs.readFileSync(absolutePath, 'utf8');
+      return { contents: source };
+    } catch {}
+    /** 3 - import are stored relatively */
+    try {
+      const absolutePath = path.resolve(basePath, relativePath);
+      const source = fs.readFileSync(absolutePath, 'utf8');
+      return { contents: source };
+    } catch {}
+    try {
+      const absolutePath = path.resolve(basePath, '../', relativePath);
+      const source = fs.readFileSync(absolutePath, 'utf8');
+      return { contents: source };
+    } catch {}
+    console.error(`${relativePath} import not found`);
+  };
+  return res;
+};
+
 const compileAndBuildAST = async (basePath: string, fileNames: string[]): Promise<SourceUnit[]> => {
   let sources: Sources = [];
 
-  // Read scope and fill file list
+  /** Read scope and fill file list */
   let i = 0;
   for (const file of fileNames) {
     const content = await fs.readFileSync(path.join(basePath, file), { encoding: 'utf8', flag: 'r' });
     if (!!content) {
-      sources.push({
-        file: path.join(basePath, file),
-        index: i++,
-        content,
-        version: content.match(/pragma solidity (.*);/)![1],
-        compiled: false,
-      });
+      if (!content.match(/pragma solidity (.*);/)) {
+        console.log(`Cannot find pragma in ${path.join(basePath, file)}`);
+      } else {
+        sources.push({
+          file: path.join(basePath, file),
+          index: i++, // Used to know when a file is compiled
+          content,
+          version: content.match(/pragma solidity (.*);/)![1],
+          compiled: false,
+        });
+      }
     }
   }
 
@@ -77,8 +127,12 @@ const compileAndBuildAST = async (basePath: string, fileNames: string[]): Promis
             res[curr.file] = { content: curr.content };
             return res;
           }, {}),
+          basePath,
         ).then(output => {
           for (const f of filteredSources) {
+            if (!output.sources[f.file]?.ast) {
+              console.log(`Cannot compile AST for ${f.file}`);
+            }
             sources[f.index].ast = output.sources[f.file]?.ast;
           }
         }),

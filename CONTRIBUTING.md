@@ -12,7 +12,7 @@ Examples:
 - [Cache Array Length](src/issues/GAS/cacheArrayLength.ts)
 - [Custom Errors](src/issues/GAS/customErrors.ts)
 
-Following the following type, just add a file in the `issues/<X>` folder and add your issue to the [index](src/issues/index.ts):
+Following this type, just add a file in the `issues/<X>` folder:
 
 ```js
 type RegexIssue = {
@@ -32,7 +32,7 @@ Examples:
 - [Cache Array Length](src/issues/GAS/cacheArrayLength.ts)
 - [Custom Errors](src/issues/GAS/customErrors.ts)
 
-Following the following type, just add a file in the `issues/<X>` folder and add your issue to the [index](src/issues/index.ts):
+Following this type, just add a file in the `issues/<X>` folder:
 
 ```js
 type ASTIssue = {

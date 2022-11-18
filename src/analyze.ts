@@ -9,7 +9,11 @@ const issueTypesTitles = {
   H: 'High Issues',
 };
 
-const analyze = (files: InputType, issues: Issue[]): string => {
+/***
+ * @notice Runs the given issues on files and generate the report markdown string
+ * @param githubLink optional url to generate links
+ */
+const analyze = (files: InputType, issues: Issue[], githubLink?: string): string => {
   let result = '';
   let analyze: { issue: Issue; instances: Instance[] }[] = [];
   for (const issue of issues) {
@@ -39,7 +43,7 @@ const analyze = (files: InputType, issues: Issue[]): string => {
     }
   }
 
-  // Summary
+  /** Summary */
   let c = 0;
   if (analyze.length > 0) {
     result += `\n## ${issueTypesTitles[analyze[0].issue.type]}\n\n`;
@@ -49,7 +53,7 @@ const analyze = (files: InputType, issues: Issue[]): string => {
     }
   }
 
-  // Issue breakdown
+  /** Issue breakdown */
   c = 0;
   for (const { issue, instances } of analyze) {
     result += `### [${issue.type}-${++c}] ${issue.title}\n`;
@@ -69,7 +73,11 @@ const analyze = (files: InputType, issues: Issue[]): string => {
     })) {
       if (o.fileName !== previousFileName) {
         if (previousFileName !== '') {
-          result += `\n${'```'}\n\n`;
+          result += `\n${'```'}\n`;
+          if (!!githubLink) {
+            result += `[Link to code](${githubLink + o.fileName})\n`;
+          }
+          result += `\n`;
         }
         result += `${'```'}solidity\nFile: ${o.fileName}\n`;
         previousFileName = o.fileName;
@@ -77,16 +85,21 @@ const analyze = (files: InputType, issues: Issue[]): string => {
 
       // Insert code snippet
       const lineSplit = o.fileContent?.split('\n');
+      const offset = o.line.toString().length;
       result += `\n${o.line}: ${lineSplit[o.line - 1]}\n`;
       if (!!o.endLine) {
         let currentLine = o.line + 1;
         while (currentLine <= o.endLine) {
-          result += `\n${currentLine}: ${lineSplit[currentLine - 1]}\n`;
+          result += `${' '.repeat(offset)}  ${lineSplit[currentLine - 1]}\n`;
           currentLine++;
         }
       }
     }
-    result += `\n${'```'}\n\n`;
+    result += `\n${'```'}\n`;
+    if (!!githubLink) {
+      result += `[Link to code](${githubLink + previousFileName})\n`;
+    }
+    result += `\n`;
   }
 
   return result;

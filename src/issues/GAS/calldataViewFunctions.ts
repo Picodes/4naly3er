@@ -1,12 +1,55 @@
-import { IssueTypes, RegexIssue } from '../../types';
+import { findAll } from 'solidity-ast/utils';
+import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../types';
+import { instanceFromSRC } from '../../utils';
 
-const issue: RegexIssue = {
-  regexOrAST: 'Regex',
+const issue: ASTIssue = {
+  regexOrAST: 'AST',
   type: IssueTypes.GAS,
-  title: 'Using calldata instead of memory for read-only arguments in external functions saves gas',
+  title: 'Use calldata instead of memory for function arguments that do not get mutated',
   description:
-    'When a function with a memory array is called externally, the abi.decode() step has to use a for-loop to copy each index of the calldata to the memory index. Each iteration of this for-loop costs at least 60 gas (i.e. 60 * <mem_array>.length). Using calldata directly, obliviates the need for such a loop in the contract code and runtime execution.\nIf the array is passed to an internal function which passes the array to another internal function where the array is modified and therefore memory is used in the external call, it’s still more gass-efficient to use calldata when the external function uses modifiers, since the modifiers may prevent the internal functions from being called. Structs have the same overhead as an array of length one',
-  regex: /function.?\([^)]*[] memory [^)]*\)[^{]*(external|view)[^{]*(external|view)/g, // function with a memory array argument and external + view modifiers
+    'Mark data types as `calldata` instead of `memory` where possible. This makes it so that the data is not automatically loaded into memory. If the data passed into the function does not need to be changed (like updating values in an array), it can be passed in as `calldata`. The one exception to this is if the argument must later be passed into another function that takes an argument that specifies `memory` storage.',
+  detector: (files: InputType): Instance[] => {
+    let instances: Instance[] = [];
+
+    for (const file of files) {
+      if (!!file.ast) {
+        for (const node of findAll('FunctionDefinition', file.ast)) {
+          if (node.visibility === 'external' || node.visibility === 'public') {
+            for (const param of Object.values(node.parameters.parameters)) {
+              if (param.storageLocation === 'memory') {
+                /** Now we have a memory variable, let's check if it is modified during the call  */
+                const variableName = param.name;
+                let modified = false;
+                for (const assign of findAll('Assignment', node)) {
+                  const variable = assign.leftHandSide;
+
+                  /** Array */
+                  if (
+                    variable.nodeType === 'IndexAccess' &&
+                    variable.baseExpression.nodeType === 'Identifier' &&
+                    variable.baseExpression.name === variableName
+                  ) {
+                    modified = true;
+                  }
+                  if (
+                    variable.nodeType === 'MemberAccess' &&
+                    variable.expression.nodeType === 'Identifier' &&
+                    variable.expression.name === variableName
+                  ) {
+                    modified = true;
+                  }
+                }
+                if (!modified) {
+                  instances.push(instanceFromSRC(file, param.src));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return instances;
+  },
 };
 
 export default issue;
