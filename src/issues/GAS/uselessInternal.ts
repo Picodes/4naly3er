@@ -34,12 +34,6 @@ const issue: ASTIssue = {
                 /** Extract contracts extending this one */
                 for (const topLevelFile of topLevelFiles(contract.id, files)) {
                   for (const topContract of findAll('ContractDefinition', topLevelFile.ast)) {
-                    console.log(
-                      topContract.name,
-                      contract.name,
-                      functionName,
-                      containsCallTo(functionName, topContract),
-                    );
                     usedInternally = usedInternally || containsCallTo(functionName, topContract);
                   }
                 }
