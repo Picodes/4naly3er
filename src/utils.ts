@@ -1,5 +1,6 @@
 import { InputType, Instance } from './types';
 import fs from 'fs';
+import { findAll } from 'solidity-ast/utils';
 
 /***
  * @notice Returns the line corresponding to a character index in a file
@@ -13,7 +14,6 @@ export const lineFromIndex = (file: string, index: number) => {
  * @param src Must be in format xx:xx:xx
  */
 export const instanceFromSRC = (file: InputType[0], start: string, end?: string): Instance => {
-  end && console.log(start, end);
   return {
     fileName: file.name,
     fileContent: file.content,
@@ -45,9 +45,25 @@ export const recursiveExploration = (basePath: string, extension = '.sol'): stri
 };
 
 /***
- * @notice Extract only top levels files
- * @dev :(file not included in an other contract in the code base)
+ * @notice Extract files extending a given contract
  */
-export const detector = (files: InputType): InputType => {
-  return null;
+export const topLevelFiles = (contractId: number, files: InputType): InputType => {
+  const res: InputType = [];
+  for (const file of files) {
+    if (!!file.ast) {
+      for (const contract of findAll('ContractDefinition', file.ast)) {
+        if (
+          contract.contractKind === 'contract' &&
+          contract.linearizedBaseContracts.includes(contractId) &&
+          contract.id !== contractId
+        ) {
+          if (!res.includes(file)) {
+            res.push(file);
+            continue;
+          }
+        }
+      }
+    }
+  }
+  return res;
 };

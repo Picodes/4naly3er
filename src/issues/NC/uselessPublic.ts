@@ -22,7 +22,6 @@ const issue: ASTIssue = {
               }
             }
             if (!usedInternally) {
-              console.log(util.inspect(node, false, 2, true));
               instances.push(instanceFromSRC(file, node.src));
             }
           }
