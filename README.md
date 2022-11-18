@@ -1,4 +1,11 @@
-<h1 align=center><code>4naly3er</code></h1>
+```
+     .---. ,--.  ,--   ,----.   ,--.  ,--.   ,-. .----. ,------.,------,
+    / .  | |   \ |  | |  ._. \  |  |  `\ . '.' /\_.-,  ||  .---'|   /`. '
+   / /|  | |  . '|  | |  |_|  | |  |    \     /   |_  <(|  '--. |  |_.' |
+  / '-'  |||  |\    | |  .-.  |(|  '_    /   /) .-. \  ||  .--' |  .   .'
+  `---|  |'|  | \   | |  | |  | |     | /   /`  \ `-'  /|  `---.|  |\  \
+      `--' `--'  `--' `--' `--' `-----' `--'     `---'' `------'`--' '--'
+```
 
 # Table of Contents
 
@@ -11,7 +18,7 @@
 ## Usage
 
 ```bash
-yarn analyze <BASE_PATH> <SCOPE_FILE>
+yarn analyze <BASE_PATH> <SCOPE_FILE> <GITHUB_URL>
 
 # Example
 yarn analyze contracts scope.example.txt
@@ -19,6 +26,7 @@ yarn analyze contracts scope.example.txt
 
 - `BASE_PATH` is a relative path to the folder containing the smart contracts.
 - `SCOPE_FILE` is an optional file containg a specific smart contracts scope (see [scope.example.txt](./scope.example.txt))
+- `GITHUB_URL` is an optional url to generate links to github in the report
 - The output will be saved in a `report.md` file.
 
 ## Example Reports
