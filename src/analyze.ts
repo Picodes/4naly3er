@@ -75,7 +75,7 @@ const analyze = (files: InputType, issues: Issue[], githubLink?: string): string
         if (previousFileName !== '') {
           result += `\n${'```'}\n`;
           if (!!githubLink) {
-            result += `[Link to code](${githubLink + o.fileName})\n`;
+            result += `[Link to code](${githubLink + previousFileName})\n`;
           }
           result += `\n`;
         }
