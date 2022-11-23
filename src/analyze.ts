@@ -49,14 +49,16 @@ const analyze = (files: InputType, issues: Issue[], githubLink?: string): string
     result += `\n## ${issueTypesTitles[analyze[0].issue.type]}\n\n`;
     result += '\n| |Issue|Instances|\n|-|:-|:-:|\n';
     for (const { issue, instances } of analyze) {
-      result += `| [${issue.type}-${++c}] | ${issue.title} | ${instances.length} |\n`;
+      c++;
+      result += `| [${issue.type}-${c}](#${issue.type}-${c}) | ${issue.title} | ${instances.length} |\n`;
     }
   }
 
   /** Issue breakdown */
   c = 0;
   for (const { issue, instances } of analyze) {
-    result += `### [${issue.type}-${++c}] ${issue.title}\n`;
+    c++;
+    result += `### <a name="${issue.type}-${c}"></a>[${issue.type}-${c}] ${issue.title}\n`;
     if (!!issue.description) {
       result += `${issue.description}\n`;
     }

@@ -1,15 +1,16 @@
 import { InputType, Instance } from './types';
 import fs from 'fs';
 import { findAll } from 'solidity-ast/utils';
+import { ContractDefinition, SourceUnit } from 'solidity-ast';
 
-/***
+/**
  * @notice Returns the line corresponding to a character index in a file
  */
 export const lineFromIndex = (file: string, index: number) => {
   return 1 + [...file?.slice(0, index).matchAll(/\n/g)!].length;
 };
 
-/***
+/**
  * @notice Builds an instance for the report from a file and a src
  * @param src Must be in format xx:xx:xx
  */
@@ -22,7 +23,7 @@ export const instanceFromSRC = (file: InputType[0], start: string, end?: string)
   };
 };
 
-/***
+/**
  * @notice Returns all file contained in a folder
  * @dev Works with a queue, could be done with a recursive function
  */
@@ -44,7 +45,7 @@ export const recursiveExploration = (basePath: string, extension = '.sol'): stri
   return fileNames;
 };
 
-/***
+/**
  * @notice Extract files extending a given contract
  */
 export const topLevelFiles = (contractId: number, files: InputType): InputType => {
@@ -66,4 +67,30 @@ export const topLevelFiles = (contractId: number, files: InputType): InputType =
     }
   }
   return res;
+};
+
+/**
+ * @notice Extracts storage variables from a contract
+ */
+export const getStorageVariable = (contract: ContractDefinition): string[] => {
+  /** Build list of storage variables */
+  let storageVariables = [...findAll('VariableDeclaration', contract)]
+    .filter(e => e.storageLocation === 'default' || e.storageLocation === 'storage')
+    .map(e => e.name);
+  /** Remove function variables */
+  for (const func of findAll('FunctionDefinition', contract)) {
+    const funcVariables = [...findAll('VariableDeclaration', func)].map(e => e.name);
+    storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
+  }
+  /** Remove event variables */
+  for (const func of findAll('EventDefinition', contract)) {
+    const funcVariables = [...findAll('VariableDeclaration', func)].map(e => e.name);
+    storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
+  }
+  /** Remove error variables */
+  for (const func of findAll('ErrorDefinition', contract)) {
+    const funcVariables = [...findAll('VariableDeclaration', func)].map(e => e.name);
+    storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
+  }
+  return storageVariables;
 };

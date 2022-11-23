@@ -1,6 +1,6 @@
 import { InputType, IssueTypes, Instance, ASTIssue } from '../../types';
 import { findAll } from 'solidity-ast/utils';
-import { instanceFromSRC } from '../../utils';
+import { getStorageVariable, instanceFromSRC } from '../../utils';
 import { Identifier } from 'solidity-ast';
 
 const issue: ASTIssue = {
@@ -16,30 +16,7 @@ const issue: ASTIssue = {
       if (!!file.ast) {
         for (const contract of findAll('ContractDefinition', file.ast)) {
           /** Build list of storage variables */
-          let storageVariables = [...findAll('VariableDeclaration', contract)]
-            .filter(e => e.storageLocation === 'default')
-            .map(e => e.name);
-          /** Remove function variables */
-          for (const func of findAll('FunctionDefinition', contract)) {
-            const funcVariables = [...findAll('VariableDeclaration', func)]
-              .filter(e => e.storageLocation === 'default')
-              .map(e => e.name);
-            storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
-          }
-          /** Remove event variables */
-          for (const func of findAll('EventDefinition', contract)) {
-            const funcVariables = [...findAll('VariableDeclaration', func)]
-              .filter(e => e.storageLocation === 'default')
-              .map(e => e.name);
-            storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
-          }
-          /** Remove error variables */
-          for (const func of findAll('ErrorDefinition', contract)) {
-            const funcVariables = [...findAll('VariableDeclaration', func)]
-              .filter(e => e.storageLocation === 'default')
-              .map(e => e.name);
-            storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
-          }
+          let storageVariables = getStorageVariable(contract);
 
           for (const func of findAll('FunctionDefinition', contract)) {
             /** Check all storage reads */
