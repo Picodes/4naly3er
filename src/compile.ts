@@ -62,14 +62,28 @@ const findImports = (basePath: string) => {
       const source = fs.readFileSync(absolutePath, 'utf8');
       return { contents: source };
     } catch {}
-    /** 2 - import are stored in `lib` */
+    /** 2 - import are stored in `lib`
+     * In this case you need to check eventual remappings
+     */
     try {
-      const absolutePath = path.resolve(basePath, 'lib', relativePath);
+      const remappings = fs.readFileSync(path.resolve(basePath, 'remappings.txt'), 'utf8');
+      for (const line of remappings.split('\n')) {
+        if (!!line.split('=')[0] && !!line.split('=')[1]) {
+          relativePath = relativePath.replace(line.split('=')[0], line.split('=')[1]);
+        }
+      }
+
+      const absolutePath = path.resolve(basePath, relativePath);
       const source = fs.readFileSync(absolutePath, 'utf8');
       return { contents: source };
     } catch {}
     try {
-      const absolutePath = path.resolve(basePath, '../lib', relativePath);
+      const remappings = fs.readFileSync(path.resolve(basePath, '../remappings.txt'), 'utf8');
+      for (const line of remappings.split('\n')) {
+        relativePath = relativePath.replace(line.split('=')[0], line.split('=')[1]);
+      }
+
+      const absolutePath = path.resolve(basePath, '../', relativePath);
       const source = fs.readFileSync(absolutePath, 'utf8');
       return { contents: source };
     } catch {}
@@ -84,7 +98,9 @@ const findImports = (basePath: string) => {
       const source = fs.readFileSync(absolutePath, 'utf8');
       return { contents: source };
     } catch {}
-    console.error(`${relativePath} import not found`);
+    console.error(
+      `${relativePath} import not found\n\nMake sure you can compile the contracts in the original repository.\n`,
+    );
   };
   return res;
 };
