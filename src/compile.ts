@@ -51,53 +51,42 @@ const compile = async (version: string, toCompile: ToCompile, basePath: string) 
  */
 const findImports = (basePath: string) => {
   const res = (relativePath: string) => {
-    /** 1 - import are stored in `node_modules` */
-    try {
-      const absolutePath = path.resolve(basePath, 'node_modules/', relativePath);
-      const source = fs.readFileSync(absolutePath, 'utf8');
-      return { contents: source };
-    } catch {}
-    try {
-      const absolutePath = path.resolve(basePath, '../node_modules/', relativePath);
-      const source = fs.readFileSync(absolutePath, 'utf8');
-      return { contents: source };
-    } catch {}
-    /** 2 - import are stored in `lib`
-     * In this case you need to check eventual remappings
-     */
-    try {
-      const remappings = fs.readFileSync(path.resolve(basePath, 'remappings.txt'), 'utf8');
-      for (const line of remappings.split('\n')) {
-        if (!!line.split('=')[0] && !!line.split('=')[1]) {
-          relativePath = relativePath.replace(line.split('=')[0], line.split('=')[1]);
+    const depth = 5;
+    let prefix = '';
+    for (let i = 0; i < depth; i++) {
+      /** 1 - import are stored in `node_modules` */
+      try {
+        const absolutePath = path.resolve(basePath, prefix, 'node_modules/', relativePath);
+        const source = fs.readFileSync(absolutePath, 'utf8');
+        return { contents: source };
+      } catch {}
+
+      /** 2 - import are stored in `lib`
+       * In this case you need to check eventual remappings
+       */
+      try {
+        const remappings = fs.readFileSync(path.resolve(basePath, prefix, 'remappings.txt'), 'utf8');
+        for (const line of remappings.split('\n')) {
+          if (!!line.split('=')[0] && !!line.split('=')[1]) {
+            relativePath = relativePath.replace(line.split('=')[0], line.split('=')[1]);
+          }
         }
-      }
 
-      const absolutePath = path.resolve(basePath, relativePath);
-      const source = fs.readFileSync(absolutePath, 'utf8');
-      return { contents: source };
-    } catch {}
-    try {
-      const remappings = fs.readFileSync(path.resolve(basePath, '../remappings.txt'), 'utf8');
-      for (const line of remappings.split('\n')) {
-        relativePath = relativePath.replace(line.split('=')[0], line.split('=')[1]);
-      }
+        const absolutePath = path.resolve(basePath, relativePath);
+        const source = fs.readFileSync(absolutePath, 'utf8');
+        return { contents: source };
+      } catch {}
 
-      const absolutePath = path.resolve(basePath, '../', relativePath);
-      const source = fs.readFileSync(absolutePath, 'utf8');
-      return { contents: source };
-    } catch {}
-    /** 3 - import are stored relatively */
-    try {
-      const absolutePath = path.resolve(basePath, relativePath);
-      const source = fs.readFileSync(absolutePath, 'utf8');
-      return { contents: source };
-    } catch {}
-    try {
-      const absolutePath = path.resolve(basePath, '../', relativePath);
-      const source = fs.readFileSync(absolutePath, 'utf8');
-      return { contents: source };
-    } catch {}
+      /** 3 - import are stored relatively */
+      try {
+        const absolutePath = path.resolve(basePath, prefix, relativePath);
+        const source = fs.readFileSync(absolutePath, 'utf8');
+        return { contents: source };
+      } catch {}
+
+      prefix += '../';
+    }
+
     console.error(
       `${relativePath} import not found\n\nMake sure you can compile the contracts in the original repository.\n`,
     );
