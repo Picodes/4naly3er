@@ -29,11 +29,17 @@ const main = async () => {
   if (!!scopeFile) {
     // Scope is specified in a .txt file
     const content = fs.readFileSync(scopeFile, { encoding: 'utf8', flag: 'r' });
-    fileNames = content.split('\n');
+    for (const word of [...content.matchAll(/[a-zA-Z./]+/g)].map(r => r[0])) {
+      if (word.endsWith('.sol')) {
+        fileNames.push(word);
+      }
+    }
   } else {
     // Scope is not specified: exploration of the folder
     fileNames = recursiveExploration(basePath);
   }
+
+  console.log('Scope: ', fileNames);
 
   // Uncomment next lines to have the list of analyzed files in the report
 
