@@ -29,7 +29,7 @@ const main = async () => {
   if (!!scopeFile) {
     // Scope is specified in a .txt file
     const content = fs.readFileSync(scopeFile, { encoding: 'utf8', flag: 'r' });
-    for (const word of [...content.matchAll(/[a-zA-Z./]+/g)].map(r => r[0])) {
+    for (const word of [...content.matchAll(/[a-zA-Z\/\.\-\_1-9]+/g)].map(r => r[0])) {
       if (word.endsWith('.sol')) {
         fileNames.push(word);
       }
