@@ -2,6 +2,7 @@ import { InputType, Instance } from './types';
 import fs from 'fs';
 import { findAll } from 'solidity-ast/utils';
 import { ContractDefinition, SourceUnit } from 'solidity-ast';
+import { exec } from 'child_process';
 
 /**
  * @notice Returns the line corresponding to a character index in a file
@@ -22,6 +23,23 @@ export const instanceFromSRC = (file: InputType[0], start: string, end?: string)
     endLine: !!end ? lineFromIndex(file.content, parseInt(end.split(':')[0])) : undefined,
   };
 };
+
+/**
+ * @notice Execute simple shell command (async wrapper).
+ * @param {String} cmd
+ * @return {Object} { stdout: String, stderr: String }
+ */
+export async function sh(cmd: string) {
+  return new Promise(function (resolve, reject) {
+    exec(cmd, (err, stdout, stderr) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve({ stdout, stderr });
+      }
+    });
+  });
+}
 
 /**
  * @notice Returns all file contained in a folder
@@ -54,11 +72,11 @@ export const topLevelFiles = (contractId: number, files: InputType): InputType =
     if (!!file.ast) {
       for (const contract of findAll('ContractDefinition', file.ast)) {
         if (
-          contract.contractKind === 'contract' &&
-          contract.linearizedBaseContracts.includes(contractId) &&
-          contract.id !== contractId
+          contract?.contractKind === 'contract' &&
+          contract?.linearizedBaseContracts?.includes(contractId) &&
+          contract?.id !== contractId
         ) {
-          if (!res.includes(file)) {
+          if (!res?.includes(file)) {
             res.push(file);
             continue;
           }
