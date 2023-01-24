@@ -12,6 +12,6 @@ contract Test {
     }
 
     function initialize() initializer external {}
-    function init() external {}
+    function init() external { }
     function transfer() external {}
 }
