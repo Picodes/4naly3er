@@ -15,6 +15,7 @@ contract Test {
     function init() external { }
     function transfer() external {}
 
+    TODO : Make these vars
     function mathTest() external {
         123 + 123;
         123+123;
