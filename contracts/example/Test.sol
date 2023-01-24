@@ -14,4 +14,26 @@ contract Test {
     function initialize() initializer external {}
     function init() external { }
     function transfer() external {}
+
+    function mathTest() external {
+        123 + 123;
+        123+123;
+        123+ 123;
+        123 +123;
+
+        123 - 123;
+        123-123;
+        123- 123;
+        123 -123;
+
+        123 * 123;
+        123*123;
+        123* 123;
+        123 *123;
+
+        123 / 123;
+        123/123;
+        123/ 123;
+        123 /123;
+    }
 }
