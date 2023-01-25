@@ -3,23 +3,38 @@ pragma solidity ^0.8.0;
 contract Test {
     uint256 a = 0;
 
-    string b = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    string c = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-    string d = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    function test(address iasd) external returns (uint256) {
+        return 123;
+    }
 
-    function test() external {
-        uint array[] = [1, 2, 3];
-        for (uint256 i = 0; i < array.length; i++) {
-            i = i / 2;
-            address(this).delegatecall(abi.encodeWithSignature("addBalance(address)", receivers[i]));
-        }
+    modifier initializer() {
+        _;
+    }
 
-        address(this).delegatecall(abi.encodeWithSignature("addBalance(address)", receivers[i]));
+    function initialize() initializer external {}
+    function init() external { }
+    function transfer() external {}
 
-        if (i> 0) {
-            return false;
-        }
+    // TODO : Make these vars
+    function mathTest() external {
+        123 + 123;
+        123+123;
+        123+ 123;
+        123 +123;
 
-        token.transferFrom(msg.sender, address(this), 100);
+        123 - 123;
+        123-123;
+        123- 123;
+        123 -123;
+
+        123 * 123;
+        123*123;
+        123* 123;
+        123 *123;
+
+        123 / 123;
+        123/123;
+        123/ 123;
+        123 /123;
     }
 }
