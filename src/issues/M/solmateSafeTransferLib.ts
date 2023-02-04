@@ -4,7 +4,7 @@ const issue: RegexIssue = {
   regexOrAST: 'Regex',
   type: IssueTypes.M,
   title:
-    ' `Solmate\'s SafeTransferLib does not check for token contract\'s existence`',
+    ' Solmate\'s SafeTransferLib does not check for token contract\'s existence',
   description:
     'There is a subtle difference between the implementation of solmate’s SafeTransferLib and OZ’s SafeERC20: OZ’s SafeERC20 checks if the token is a contract or not, solmate’s SafeTransferLib does not.\n'
     + 'https://github.com/transmissions11/solmate/blob/main/src/utils/SafeTransferLib.sol#L9 \n'
