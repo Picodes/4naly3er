@@ -22,6 +22,10 @@ const analyze = (files: InputType, issues: Issue[], githubLink?: string): string
     if (issue.regexOrAST === 'Regex') {
       for (const file of files) {
         const matches: any = [...file.content.matchAll(issue.regex)];
+        if(!!issue.regexPreCondition) {
+          const preConditionMatches: any = [...file.content.matchAll(issue.regexPreCondition)];
+          if (preConditionMatches.length == 0) continue;
+        }
         for (const res of matches) {
           // Filter lines that are comments
           const line = [...res.input?.slice(0, res.index).matchAll(/\n/g)!].length;
