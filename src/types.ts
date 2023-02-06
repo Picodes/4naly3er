@@ -26,6 +26,7 @@ export type RegexIssue = {
   type: IssueTypes;
   title: string;
   regex: RegExp;
+  regexPreCondition?: RegExp;
   impact?: string;
   description?: string;
   startLineModifier?: number; // To build the code snipped from the index of the regex
