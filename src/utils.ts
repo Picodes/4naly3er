@@ -93,7 +93,7 @@ export const topLevelFiles = (contractId: number, files: InputType): InputType =
 export const getStorageVariable = (contract: ContractDefinition): string[] => {
   /** Build list of storage variables */
   let storageVariables = [...findAll('VariableDeclaration', contract)]
-    .filter(e => e.storageLocation === 'default' || e.storageLocation === 'storage')
+    .filter(e => (e.storageLocation === 'default' || e.storageLocation === 'storage') && e.mutability === 'mutable')
     .map(e => e.name);
   /** Remove function variables */
   for (const func of findAll('FunctionDefinition', contract)) {
