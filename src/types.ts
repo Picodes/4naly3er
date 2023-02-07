@@ -16,6 +16,7 @@ export type Instance = {
   fileName: string; // Name of the file in which the issue has been found
   fileContent: string; // Content of the file in which the issue has been found
   line: number;
+  fix?: string;
   endLine?: number;
 };
 
@@ -27,6 +28,7 @@ export type RegexIssue = {
   title: string;
   regex: RegExp;
   regexPreCondition?: RegExp;
+  allowComments?: boolean; // If the issue occurs in comments
   impact?: string;
   description?: string;
   startLineModifier?: number; // To build the code snipped from the index of the regex

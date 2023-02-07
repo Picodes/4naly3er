@@ -66,11 +66,7 @@ const main = async (
   });
 
   for (const t of Object.values(IssueTypes)) {
-    result += analyze(
-      files,
-      issues.filter(i => i.type === t),
-      !!githubLink ? githubLink : undefined,
-    );
+    result += await analyze(files, issues, t, !!githubLink ? githubLink : undefined);
   }
 
   fs.writeFileSync(out, result);

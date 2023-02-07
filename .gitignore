@@ -1,6 +1,7 @@
 node_modules
 report.md
 .vscode/tasks.json
+.env
 scope.txt
 repos
 reports
