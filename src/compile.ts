@@ -53,6 +53,7 @@ const findImports = (basePath: string) => {
   const res = (relativePath: string) => {
     const depth = 5;
     let prefix = '';
+
     for (let i = 0; i < depth; i++) {
       /** 1 - import are stored in `node_modules` */
       try {
