@@ -19,7 +19,7 @@ const checkTypos = async (files: InputType): Promise<{ issue: Issue; instances: 
   let instances: Instance[] = [];
 
   /** Typo checking */
-  if (!!process.env.OPENAI_API_KEY) {
+  if (!!process.env.OPENAI_API_KEY && process.env.OPENAI_ENABLED !== 'false') {
     for (const file of files) {
       /** Cut file in 100 lines blocks */
       const lines: { line: string; index: number }[] = file?.content

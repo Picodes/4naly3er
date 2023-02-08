@@ -13,6 +13,7 @@
   - [Usage](#usage)
   - [Example Reports](#example-reports)
   - [Installation](#installation)
+  - [ChatGPT](#chatgpt)
   - [Contributing](#contributing)
 
 ## Usage
@@ -46,8 +47,16 @@ You'll need [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/). The
 ```bash
 yarn
 ```
-
 You're all set!
+
+## ChatGPT
+Please copy the `.env.example` file to `.env` and fill out the details if you have a ChatGPT API key. You can also set the API key as an environment variable.
+```bash
+cp .env.example .env
+```
+If you want to disable ChatGPT while testing other implementations, you can set `OPENAI_ENABLED=false`.
+
+
 
 ## Contributing
 
