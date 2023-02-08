@@ -62,7 +62,10 @@ const analyze = async (
 
   /** Check Typos */
   if (type === IssueTypes.NC) {
-    analyze.push(await checkTypos(files));
+    const { issue, instances } = await checkTypos(files);
+    if (instances.length > 0) {
+      analyze.push({ issue, instances });
+    }
   }
 
   /** Summary */
