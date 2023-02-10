@@ -9,6 +9,9 @@
   "scripts": {
     "analyze": "ts-node src/index.ts"
   },
+  "bin": {
+    "4naly3er": "./bin/4naly3er.ts"
+  },
   "dependencies": {
     "@types/node": "^7.0.5",
     "@types/semver": "^7.3.13",
