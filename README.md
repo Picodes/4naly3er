@@ -13,6 +13,7 @@
   - [Usage](#usage)
   - [Example Reports](#example-reports)
   - [Installation](#installation)
+    - [Install globally](#install-globally)
   - [ChatGPT](#chatgpt)
   - [Contributing](#contributing)
 
@@ -48,6 +49,22 @@ You'll need [Node.js](https://nodejs.org/) and [Yarn](https://yarnpkg.com/). The
 yarn
 ```
 You're all set!
+
+### Install globally
+
+In order to be able to run `4naly3er` as a command in any folder, like when you clone a new C4 repo for a contest, you will need to:
+
+- install ts-node globally
+```bash
+npm install -g ts-node
+```
+
+- install 4naly3er globally
+```bash
+npm install -g .
+```
+
+And now your `4naly3er` command will be always available in any repository you wish to analyze. Enjoy!
 
 ## ChatGPT
 Please copy the `.env.example` file to `.env` and fill out the details if you have a ChatGPT API key. You can also set the API key as an environment variable.
