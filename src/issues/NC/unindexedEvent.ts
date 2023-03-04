@@ -1,7 +1,7 @@
 import { findAll } from 'solidity-ast/utils';
 import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../types';
 import util from 'util';
-import { instanceFromSRC } from '../../utils';
+import { instanceFromSRC, lineFromIndex } from '../../utils';
 
 const issue: ASTIssue = {
   regexOrAST: 'AST',

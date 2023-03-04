@@ -3,9 +3,9 @@ import { IssueTypes, RegexIssue } from '../../types';
 const issue: RegexIssue = {
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
-  title: "`++i` costs less gas than `i++`, especially when it's used in `for`-loops (`--i`/`i--` too)",
-  description: '*Saves 5 gas per loop*',
-  regex: /[^ \t]+\+\+/g,
+  title: 'Pre-increments and pre-decrements are cheaper than post-increments and post-decrements',
+  description: '*Saves 5 gas per iteration*',
+  regex: /\w(\+\+|--)/g,
 };
 
 export default issue;
