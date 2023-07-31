@@ -29,8 +29,8 @@ type RegexIssue = {
 
 Examples:
 
-- [Cache Array Length](src/issues/GAS/cacheArrayLength.ts)
-- [Custom Errors](src/issues/GAS/customErrors.ts)
+- [Use Assembly when querying balances](src/issues/GAS/addressBalance.ts)
+- [Use Assembly to check `address != 0`](src/issues/GAS/addressZero.ts)
 
 Following this type, just add a file in the `issues/<X>` folder:
 
@@ -45,7 +45,4 @@ type ASTIssue = {
 };
 ```
 
-Examples:
 
-- [Use Assembly when querying balances](src/issues/GAS/addressBalance.ts)
-- [Use Assembly to check `address != 0`](src/issues/GAS/addressZero.ts)
