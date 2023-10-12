@@ -21,6 +21,7 @@
     "eslint-plugin-mocha": "^10.0.3",
     "eslint-plugin-mocha-no-only": "1.1.1",
     "eslint-plugin-node": "11.1.0",
+    "commander": "^11.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
