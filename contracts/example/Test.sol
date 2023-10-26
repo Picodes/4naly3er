@@ -37,4 +37,9 @@ contract Test {
         123/ 123;
         123 /123;
     }
+
+    function divisionBeforeMultiplication() external {
+        12 / 23 * 14;
+        12 / (23 * 14);
+    }
 }
