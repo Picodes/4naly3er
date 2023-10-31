@@ -37,4 +37,46 @@ contract Test {
         123/ 123;
         123 /123;
     }
+
+    function test_delegatecall_inloop_1() payable external {
+        uint256 = sum;
+        for(uint i=0; i<10 ; i++) {
+		
+			if(i == 3 ) {
+				continue;
+			}
+			
+			if(i == 5 ) {
+				continue;
+			}
+			// some comment
+            address(this).delegatecall(); // should be reported
+        }
+
+        while(i>0) {
+            i = i-1;
+			
+			if( i == 5) { continue;}
+
+            address(vault).call{value: 0.2}();
+			// come comment
+            address(this).delegatecall(); // should be reported
+        }
+
+        do {
+            address(this).delegatecall();  // should be reported
+            i = i+1;
+        }  while (i < 10) ;
+    }
+
+    function test_delegatecall_inloop_2() payable external {
+        for(uint i=0; i<10 ; i++) {
+		
+			if(i == 3 ) {
+				continue;
+			} // some comment
+
+        } // some comment
+        address(this).delegatecall(); // this shouldn't be reported
+    }
 }
