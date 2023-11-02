@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import semver from 'semver';
 import type { SourceUnit } from 'solidity-ast';
-import { recursiveExploration } from './utils';
 
 const versions = Object.keys(require('../package.json').dependencies)
   .filter(s => s.startsWith('solc-'))
