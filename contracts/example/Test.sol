@@ -49,6 +49,16 @@ contract Test {
         b[5];
     }
 
+    function test_longLine() external {
+        require(msg.sender == returnHighestBidder(_tokenId) || adminsContract.retrieveFunctionAdmin(msg.sender, _selector) == true || adminsContract.retrieveGlobalAdmin(msg.sender) == true, "Not allowed");
+
+        // 121 length
+        "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567";
+
+        // 120 length
+        "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456";
+    }
+
     function test_delegatecall_inloop_1() payable external {
         uint256 = sum;
         for(uint i=0; i<10 ; i++) {
