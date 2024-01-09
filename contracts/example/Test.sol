@@ -90,4 +90,9 @@ contract Test {
         } // some comment
         address(this).delegatecall(); // this shouldn't be reported
     }
+
+    function divisionBeforeMultiplication() external {
+        12 / 23 * 14;
+        12 / (23 * 14);
+    }
 }
