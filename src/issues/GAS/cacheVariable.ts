@@ -75,9 +75,10 @@ const issue: ASTIssue = {
                 }
               }
               /** Check that there is more than 2 reads */
-              const occurences = identifiers.filter(r => r.name === variableName);
-              if (isStorage && occurences?.length > 1) {
-                instances.push(instanceFromSRC(file, occurences[1].src));
+              const occurrences = identifiers.filter(r => r.name === variableName);
+              if (isStorage && occurrences?.length > 1) {
+                for (let i = 1; i < occurrences.length; i++)
+                  instances.push(instanceFromSRC(file, occurrences[i].src));
               }
             }
           }
