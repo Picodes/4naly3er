@@ -1,6 +1,7 @@
 node_modules
 report.md
-.vscode/tasks.json
+.vscode/
 scope.txt
 repos
 reports
+github-projects/
