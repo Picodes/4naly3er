@@ -6,13 +6,16 @@ import util from 'util';
 const issue: ASTIssue = {
   regexOrAST: 'AST',
   type: IssueTypes.NC,
-  title: 'Functions not used internally could be marked external',
+  title: '`public` functions not called by the contract should be declared `external` instead',
   detector: (files: InputType): Instance[] => {
     let instances: Instance[] = [];
 
     for (const file of files) {
       if (!!file.ast) {
         for (const node of findAll('FunctionDefinition', file.ast)) {
+          if(node.overrides){
+            continue;
+          }
           if (node.visibility === 'public' && !node.virtual && node.name !== '') {
             const functionName = node.name;
             let usedInternally = false;
