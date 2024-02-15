@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import semver from 'semver';
 import type { SourceUnit } from 'solidity-ast';
+import { recursiveExploration } from './utils';
 
 const versions = Object.keys(require('../package.json').dependencies)
   .filter(s => s.startsWith('solc-'))
@@ -70,6 +71,16 @@ const findImports = (basePath: string) => {
             relativePath = relativePath.replace(line.split('=')[0], line.split('=')[1]);
           }
         }
+        
+        // Dedouping logic for nested remappings
+        let arrayRelativePath = relativePath.split("/");
+        let dedoupedArrayRelativePath = [arrayRelativePath[0]];
+        for(let j = 1; j < arrayRelativePath.length; j++){
+          if(arrayRelativePath[j - 1] != arrayRelativePath[j]){
+            dedoupedArrayRelativePath.push(arrayRelativePath[j]);
+          }
+        }
+        relativePath = dedoupedArrayRelativePath.join("/");
 
         const absolutePath = path.resolve(basePath, relativePath);
         const source = fs.readFileSync(absolutePath, 'utf8');
@@ -99,7 +110,7 @@ const compileAndBuildAST = async (basePath: string, fileNames: string[]): Promis
   /** Read scope and fill file list */
   let i = 0;
   for (const file of fileNames) {
-    const content = fs.readFileSync(path.join(basePath, file), { encoding: 'utf8', flag: 'r' });
+    const content = await fs.readFileSync(path.join(basePath, file), { encoding: 'utf8', flag: 'r' });
     if (!!content) {
       if (!content.match(/pragma solidity (.*);/)) {
         console.log(`Cannot find pragma in ${path.join(basePath, file)}`);
@@ -133,6 +144,11 @@ const compileAndBuildAST = async (basePath: string, fileNames: string[]): Promis
           }, {}),
           basePath,
         ).then(output => {
+          if(output.errors && output.errors.length > 0){
+            for (const _error of output.errors) {
+              console.error(_error);
+            }
+          }
           for (const f of filteredSources) {
             if (!output.sources[f.file]?.ast) {
               console.log(`Cannot compile AST for ${f.file}`);
