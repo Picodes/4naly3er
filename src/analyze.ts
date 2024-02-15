@@ -1,4 +1,4 @@
-import { InputType, Instance, Issue } from './types';
+import { InputType, Instance, Issue, IssueTypes } from './types';
 import { lineFromIndex } from './utils';
 
 const issueTypesTitles = {
@@ -32,7 +32,7 @@ const analyze = (files: InputType, issues: Issue[], githubLink?: string): string
           const comments = [...res.input?.split('\n')[line].matchAll(/([ \t]*\/\/|[ \t]*\/\*|[ \t]*\*)/g)];
           if (comments.length === 0 || comments?.[0]?.index !== 0) {
             let line = lineFromIndex(res.input, res.index);
-            let endLine = undefined;
+            let endLine: any;
             if (!!issue.startLineModifier) line += issue.startLineModifier;
             if (!!issue.endLineModifier) endLine = line + issue.endLineModifier;
             instances.push({ fileName: file.name, line, endLine, fileContent: res.input! });
@@ -42,7 +42,21 @@ const analyze = (files: InputType, issues: Issue[], githubLink?: string): string
     } else {
       instances = issue.detector(files);
     }
+
     if (instances.length > 0) {
+      // Removing duplicates. May slows things down
+      let indexAdjusted = 0;
+      for (let i = 1; i < instances.length;) {
+        if (
+          instances[i - 1].fileName == instances[i].fileName &&
+          instances[i - 1].line == instances[i].line &&
+          (!instances[i - 1].endLine || !instances[i].endLine || instances[i - 1].endLine == instances[i].endLine)
+        ) {
+          instances.splice(i - 1, 1);
+        } else {
+          i++;
+        }
+      }
       analyze.push({ issue, instances });
     }
   }
