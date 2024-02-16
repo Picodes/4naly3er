@@ -3,6 +3,7 @@ import fs from 'fs';
 import { findAll } from 'solidity-ast/utils';
 import { ContractDefinition, SourceUnit } from 'solidity-ast';
 import { exec } from 'child_process';
+const path = require('node:path');
 
 /**
  * @notice Returns the line corresponding to a character index in a file
@@ -50,12 +51,15 @@ export const recursiveExploration = (basePath: string, extension = '.sol'): stri
   let directoryQueue = [''];
   while (directoryQueue.length > 0) {
     let dir = directoryQueue.pop();
-    let tempFileNames = fs.readdirSync(`${basePath}${dir}`);
-    for (let fileName of tempFileNames) {
+    let tempFileNames = fs.readdirSync(path.join(basePath, dir));
+    for (let  fileName of tempFileNames) {
       fileName = `${dir}${fileName}`;
+      if (fileName === 'node_modules') {
+        continue;
+      }
       if (fileName.endsWith(extension)) {
         fileNames.push(fileName);
-      } else if (fs.statSync(`${basePath}${fileName}`).isDirectory()) {
+      } else if (fs.statSync(path.join(basePath, fileName)).isDirectory()) {
         directoryQueue.push(fileName + '/');
       }
     }
@@ -111,4 +115,24 @@ export const getStorageVariable = (contract: ContractDefinition): string[] => {
     storageVariables = storageVariables.filter(e => !funcVariables.includes(e));
   }
   return storageVariables;
+};
+
+export const gitUrlToSsh = (url: string) => {
+  const regex = /^(https?:\/\/)?github\.com\/([a-zA-Z0-9-_.]+\/[a-zA-Z0-9-_.]+)(\/?)$/;
+
+  const match = url.match(regex);
+  if (match && match.length === 4) {
+    const [_, protocol, repoPath, trailingSlash] = match;
+
+    const formattedRepoPath = repoPath.endsWith('/') ? repoPath.slice(0, -1) : repoPath;
+    const [username, projectName] = formattedRepoPath.split('/');
+
+    return [
+      `git@github.com:${formattedRepoPath}.git`,
+      username,
+      projectName,
+    ];
+  } else {
+    return [];
+  }
 };

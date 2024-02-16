@@ -4,12 +4,13 @@ import compileAndBuildAST from './compile';
 import issues from './issues';
 import { InputType, IssueTypes } from './types';
 import { recursiveExploration } from './utils';
+const path = require('node:path');
 
-/*   .---. ,--.  ,--  / ,---.   ,--.   ,--.'  ,-. .----. ,------.,------, 
-    / .  | |   \ |  | | \ /`.\  |  |   `\ . '.' /\_.-,  ||  .---'|   /`. ' 
-   / /|  | |  . '|  |)'-'|_.' | |  |     \     /   |_  <(|  '--. |  |_.' | 
-  / '-'  |||  |\    |(|  .-.  |(|  '_     /   /) .-. \  ||  .--' |  .   .' 
-  `---|  |'|  | \   | |  | |  | |     |`-/   /`  \ `-'  /|  `---.|  |\  \  
+/*   .---. ,--.  ,--  / ,---.   ,--.   ,--.'  ,-. .----. ,------.,------,
+    / .  | |   \ |  | | \ /`.\  |  |   `\ . '.' /\_.-,  ||  .---'|   /`. '
+   / /|  | |  . '|  |)'-'|_.' | |  |     \     /   |_  <(|  '--. |  |_.' |
+  / '-'  |||  |\    |(|  .-.  |(|  '_     /   /) .-. \  ||  .--' |  .   .'
+  `---|  |'|  | \   | |  | |  | |     |`-/   /`  \ `-'  /|  `---.|  |\  \
     `--' `--'  `--' `--' `--' `-----'  `--'     `---'' `------'`--' '--' */
 
 // ============================== GENERATE REPORT ==============================
@@ -25,7 +26,7 @@ const main = async (
   basePath: string,
   scopeFile: string | null,
   githubLink: string | null,
-  out: string,
+  out?: string,
   scope?: string,
 ) => {
   let result = '# Report\n\n';
@@ -45,21 +46,21 @@ const main = async (
     fileNames = recursiveExploration(basePath);
   }
 
-  console.log('Scope: ', fileNames);
+  // console.log('Scope: ', fileNames);
 
   // Uncomment next lines to have the list of analyzed files in the report
 
-  // result += '## Files analyzed\n\n';
-  // fileNames.forEach(fileName => {
-  //   result += ` - ${fileName}\n`;
-  // });
+  result += '## Files analyzed\n\n';
+  fileNames.forEach(fileName => {
+    result += ` - ${fileName}\n`;
+  });
 
   // Read file contents and build AST
   const files: InputType = [];
   const asts = await compileAndBuildAST(basePath, fileNames);
   fileNames.forEach((fileName, index) => {
     files.push({
-      content: fs.readFileSync(`${basePath}${fileName}`, { encoding: 'utf8', flag: 'r' }),
+      content: fs.readFileSync(path.join(basePath, fileName), { encoding: 'utf8', flag: 'r' }),
       name: fileName,
       ast: asts[index],
     });
@@ -73,6 +74,9 @@ const main = async (
     );
   }
 
+  if (!out) {
+    return result;
+  }
   fs.writeFileSync(out, result);
 };
 
