@@ -46,7 +46,7 @@ export async function sh(cmd: string) {
  * @dev Works with a queue, could be done with a recursive function
  */
 export const recursiveExploration = (basePath: string, extension = '.sol'): string[] => {
-  let fileNames = [];
+  let fileNames: string[] = [];
   let directoryQueue = [''];
   while (directoryQueue.length > 0) {
     let dir = directoryQueue.pop();
@@ -93,7 +93,7 @@ export const topLevelFiles = (contractId: number, files: InputType): InputType =
 export const getStorageVariable = (contract: ContractDefinition): string[] => {
   /** Build list of storage variables */
   let storageVariables = [...findAll('VariableDeclaration', contract)]
-    .filter(e => (e.storageLocation === 'default' || e.storageLocation === 'storage') && e.mutability === 'mutable')
+    .filter(e => (e.stateVariable || e.storageLocation === 'storage') && !e.constant)
     .map(e => e.name);
   /** Remove function variables */
   for (const func of findAll('FunctionDefinition', contract)) {

@@ -5,7 +5,7 @@ import { instanceFromSRC } from '../../utils';
 const issue: ASTIssue = {
   regexOrAST: 'AST',
   type: IssueTypes.NC,
-  title: ' `require()` / `revert()` statements should have descriptive reason strings',
+  title: '`require()` / `revert()` statements should have descriptive reason strings',
   detector: (files: InputType): Instance[] => {
     let instances: Instance[] = [];
 
