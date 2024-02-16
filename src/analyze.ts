@@ -1,4 +1,4 @@
-import { InputType, Instance, Issue } from './types';
+import { InputType, Instance, Issue, IssueTypes } from './types';
 import { lineFromIndex } from './utils';
 
 const issueTypesTitles = {
