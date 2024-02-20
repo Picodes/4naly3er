@@ -35,7 +35,7 @@ yarn analyze contracts scope.example.txt
 yarn print [outputFilePath]
 ```
 
- - '`outputFilePath` is an optional file path to store title and impact/ description of supported issues in markdown file.
+ - `outputFilePath` is an optional file path to store title and impact/ description of supported issues in markdown file.
 
 
 ## Example Reports
