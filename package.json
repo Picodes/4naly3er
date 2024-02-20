@@ -7,7 +7,8 @@
   "license": "Unlicensed",
   "private": true,
   "scripts": {
-    "analyze": "ts-node src/index.ts"
+    "analyze": "ts-node src/index.ts",
+    "print": "ts-node src/printer.ts"
   },
   "dependencies": {
     "@types/node": "^7.0.5",
