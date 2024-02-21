@@ -1,11 +1,11 @@
 import { SourceUnit } from 'solidity-ast';
 
 export enum IssueTypes {
+  H = 'H',
+  M = 'M',
+  L = 'L',
   GAS = 'GAS',
   NC = 'NC',
-  L = 'L',
-  M = 'M',
-  H = 'H',
 }
 
 // List of solidity files with content and name
