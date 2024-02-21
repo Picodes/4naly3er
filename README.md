@@ -30,6 +30,14 @@ yarn analyze contracts scope.example.txt
 - For remappings, add `remappings.txt` to `BASE_PATH`.
 - The output will be saved in a `report.md` file.
 
+**print title and impact/ description of supported issues**
+```bash
+yarn print [outputFilePath]
+```
+
+ - `outputFilePath` is an optional file path to store title and impact/ description of supported issues in markdown file.
+
+
 ## Example Reports
 
 | Repository                                                                        | Report                                                                     |
