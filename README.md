@@ -25,7 +25,7 @@ yarn analyze contracts scope.example.txt
 ```
 
 - `BASE_PATH` is a relative path to the folder containing the smart contracts.
-- `SCOPE_FILE` is an optional file containg a specific smart contracts scope (see [scope.example.txt](./scope.example.txt))
+- `SCOPE_FILE` is an optional file containing a specific smart contracts scope (see [scope.example.txt](./scope.example.txt))
 - `GITHUB_URL` is an optional url to generate links to github in the report
 - For remappings, add `remappings.txt` to `BASE_PATH`.
 - The output will be saved in a `report.md` file.

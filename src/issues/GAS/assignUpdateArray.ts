@@ -7,7 +7,7 @@ const issue: ASTIssue = {
   type: IssueTypes.GAS,
   title: '`array[index] += amount` is cheaper than `array[index] = array[index] + amount` (or related variants)',
   description:
-    'When updating a value in an array with arithmetic, using `array[index] += amount` is cheaper than `array[index] = array[index] + amount`.\nThis is because you avoid an additonal `mload` when the array is stored in memory, and an `sload` when the array is stored in storage.\nThis can be applied for any arithmetic operation including `+=`, `-=`,`/=`,`*=`,`^=`,`&=`, `%=`, `<<=`,`>>=`, and `>>>=`.\nThis optimization can be particularly significant if the pattern occurs during a loop.\n\n*Saves 28 gas for a storage array, 38 for a memory array*',
+    'When updating a value in an array with arithmetic, using `array[index] += amount` is cheaper than `array[index] = array[index] + amount`.\n\nThis is because you avoid an additional `mload` when the array is stored in memory, and an `sload` when the array is stored in storage.\n\nThis can be applied for any arithmetic operation including `+=`, `-=`,`/=`,`*=`,`^=`,`&=`, `%=`, `<<=`,`>>=`, and `>>>=`.\n\nThis optimization can be particularly significant if the pattern occurs during a loop.\n\n*Saves 28 gas for a storage array, 38 for a memory array*',
   detector: (files: InputType): Instance[] => {
     let instances: Instance[] = [];
 
