@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'disableRenounceOwnership',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Consider disabling `renounceOwnership()`',

@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, lineFromIndex } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'msgValueInLoop',
   regexOrAST: 'AST',
   type: IssueTypes.H,
   title: 'Using `msg.value` in a loop',

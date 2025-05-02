@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'requireWithString',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: '`require()` / `revert()` statements should have descriptive reason strings',

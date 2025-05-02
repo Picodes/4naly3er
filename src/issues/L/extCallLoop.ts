@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { getStorageVariable, instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'extCallLoop',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'External calls in an un-bounded `for-`loop may result in a DOS',

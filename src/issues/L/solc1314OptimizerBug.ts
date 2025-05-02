@@ -3,6 +3,7 @@ import { findAll } from 'solidity-ast/utils';
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'solc1314OptimizerBug',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'File allows a version of solidity that is susceptible to an assembly optimizer bug',

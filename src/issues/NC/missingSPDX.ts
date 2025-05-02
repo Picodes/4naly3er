@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'missingSPDX',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'File\'s first line is not an SPDX Identifier',

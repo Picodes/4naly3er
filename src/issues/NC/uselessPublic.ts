@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'uselessPublic',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: '`public` functions not called by the contract should be declared `external` instead',

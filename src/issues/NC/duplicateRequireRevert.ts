@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'duplicateRequireRevert',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Duplicated `require()`/`revert()` Checks Should Be Refactored To A Modifier Or Function',

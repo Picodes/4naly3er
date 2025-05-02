@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'extCallRecipientGas',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'External call recipient may consume all transaction gas',

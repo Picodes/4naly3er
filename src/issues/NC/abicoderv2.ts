@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'abicoderV2',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'abicoder v2 is enabled by default',

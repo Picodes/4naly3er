@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'eventOldNew',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Events that mark critical parameter changes should contain both the old and the new value',

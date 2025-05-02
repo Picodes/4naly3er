@@ -3,6 +3,7 @@ import { findAll } from 'solidity-ast/utils';
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'assignUpdateArray',
   regexOrAST: 'AST',
   type: IssueTypes.GAS,
   title: '`array[index] += amount` is cheaper than `array[index] = array[index] + amount` (or related variants)',

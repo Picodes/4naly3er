@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'namedMappings',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Consider using named mappings',

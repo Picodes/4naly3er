@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'deprecatedTransfer',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: '`call()` should be used instead of `transfer()` on an `address payable`',

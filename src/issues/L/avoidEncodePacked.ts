@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'avoidEncodePacked',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title:

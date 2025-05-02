@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'constantsInsteadMagic',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: '`constant`s should be defined rather than using magic numbers',

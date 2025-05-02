@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'useOnlyInitializing',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Use `initializer` for public-facing functions only. Replace with `onlyInitializing` on internal functions.',

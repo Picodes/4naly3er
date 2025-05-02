@@ -4,6 +4,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, topLevelFiles, getStorageVariable } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'nftRedefinesMint',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: "NFT contract redefines `_mint()`/`_safeMint()`, but not both",

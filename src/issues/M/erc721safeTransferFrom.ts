@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'erc721safeTransferFrom',
   regexOrAST: 'Regex',
   type: IssueTypes.M,
   title: 'Using `transferFrom` on ERC721 tokens',

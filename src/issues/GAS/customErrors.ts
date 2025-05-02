@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'customErrors',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Use Custom Errors instead of Revert Strings to save Gas',

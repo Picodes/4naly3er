@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'foTTokens',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Contracts are vulnerable to fee-on-transfer accounting-related issues',

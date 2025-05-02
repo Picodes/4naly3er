@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'functionsTooLong',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Functions should not be longer than 50 lines',

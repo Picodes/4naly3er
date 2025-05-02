@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'div0NotPrevented',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Division by zero not prevented',

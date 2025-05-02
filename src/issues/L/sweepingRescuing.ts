@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'sweepingRescuing',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Sweeping may break accounting if tokens with multiple addresses are used',

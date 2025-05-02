@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'constantStyle',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Constants should be in CONSTANT_CASE',

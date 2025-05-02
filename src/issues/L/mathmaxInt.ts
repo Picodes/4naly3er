@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'mathmaxInt',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: '`Math.max(<x>,0)` used with `int` cast to `uint`',

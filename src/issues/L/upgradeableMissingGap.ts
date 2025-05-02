@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'upgradeableMissingGap',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title:

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'ownerRenounceDuringPause',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Owner can renounce while system is paused',

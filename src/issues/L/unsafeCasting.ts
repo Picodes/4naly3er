@@ -5,6 +5,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'unsafeCasting',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title:

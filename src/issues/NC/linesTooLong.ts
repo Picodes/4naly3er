@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'linesTooLong',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Lines are too long',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'nonReentrantBeforeModifiers',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'The `nonReentrant` `modifier` should occur before all other modifiers',

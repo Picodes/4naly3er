@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'nftOwnershipHardfork',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'NFT ownership doesn\'t support hard forks',

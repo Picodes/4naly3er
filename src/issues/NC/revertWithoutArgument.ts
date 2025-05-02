@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'revertWithoutArgument',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: "Take advantage of Custom Error's return value property",

@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'eventNoArgs',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Events should use parameters to convey information',

@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, lineFromIndex } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'staleOracleDataL2Sequencer',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: "Missing checks for whether the L2 Sequencer is active",

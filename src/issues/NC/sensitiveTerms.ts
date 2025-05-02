@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'sensitiveTerms',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Avoid the use of sensitive terms',

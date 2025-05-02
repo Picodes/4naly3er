@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'libraryPublicFunction',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Library function isn\'t `internal` or `private`',

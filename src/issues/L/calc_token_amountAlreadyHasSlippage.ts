@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'calcTokenAmountSlippage',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: '`calc_token_amount()` has slippage added on top of Curve\'s calculated slippage',

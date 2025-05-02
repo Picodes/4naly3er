@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'dontCacheIfUsedOnce',
   regexOrAST: 'AST',
   type: IssueTypes.GAS,
   title: 'Stack variable used as a cheaper cache for a state variable is only used once',

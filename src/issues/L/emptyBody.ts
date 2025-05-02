@@ -5,6 +5,7 @@ import util from 'util';
 
 // regex: /(\{\})|(\{ \})/gi,
 const issue: ASTIssue = {
+  id: 'emptyBody',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Empty Function Body - Consider commenting why',

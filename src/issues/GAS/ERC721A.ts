@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'erc721A',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Use ERC721A instead ERC721',

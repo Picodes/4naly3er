@@ -1,6 +1,7 @@
 import {IssueTypes} from "../../types";
 
 const issue = {
+    id: 'deprecatedChainlinkFunction',
     regexOrAST: 'Regex',
     type: IssueTypes.M,
     title: 'Use of deprecated chainlink function: `latestAnswer()`',

@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'unsafeERC20Transfer',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Unsafe use of `transfer()`/`transferFrom()` with `IERC20`',

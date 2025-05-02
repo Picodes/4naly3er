@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'noAddressHardcode',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: '`address`s shouldn\'t be hard-coded',

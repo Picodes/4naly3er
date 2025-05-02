@@ -2,6 +2,7 @@ import { IssueTypes, RegexIssue } from '../../types';
 
 // Also catches the checks in modifiers and should be an AST detector
 const issue: RegexIssue = {
+  id: 'modifierForMsgSender',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Use a `modifier` instead of a `require/if` statement for a special `msg.sender` actor',

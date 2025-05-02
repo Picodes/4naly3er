@@ -8,6 +8,10 @@ export enum IssueTypes {
   H = 'H',
 }
 
+export enum ReportTypes {
+  markdown = 'markdown'
+}
+
 // List of solidity files with content and name
 export type InputType = { content: string; name: string; ast: SourceUnit }[];
 
@@ -23,6 +27,7 @@ export type Issue = RegexIssue | ASTIssue;
 
 // Type to follow to add an issue detected by a regex
 export type RegexIssue = {
+  id: string;
   type: IssueTypes;
   title: string;
   regex: RegExp;
@@ -36,10 +41,47 @@ export type RegexIssue = {
 
 // Type to follow to add an issue detected by AST analysis
 export type ASTIssue = {
+  id: string;
   type: IssueTypes;
   title: string;
   impact?: string;
   description?: string;
   detector: (files: InputType) => Instance[]; // Function analyzing the AST and returning instances of the issue
   regexOrAST: 'AST';
+};
+
+// Type to bundle Issues and Instances for splitting Analysis and Printing steps
+export type Analysis = {
+  issue: Issue;
+  instances: Instance[];
+};
+
+export type AnalysisResults = {
+  GAS?: Analysis[];
+  NC?: Analysis[];
+  L?: Analysis[];
+  M?: Analysis[];
+  H?: Analysis[];
+}
+
+export type SARIFResult = {
+  ruleId: string;
+  message: {
+    text: string;
+  };
+  locations: Location[];
+  level: string;
+};
+
+export type Location = {
+  physicalLocation: {
+    artifactLocation: {
+      uri: string;
+    };
+    region: {
+      startLine: number;
+      startColumn: number;
+      endLine?: number;
+    };
+  };
 };

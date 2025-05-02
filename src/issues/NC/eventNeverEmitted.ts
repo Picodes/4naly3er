@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'eventNeverEmitted',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Event is never emitted',

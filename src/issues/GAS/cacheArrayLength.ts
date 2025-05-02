@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'cacheArrayLength',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Cache array length outside of loop',

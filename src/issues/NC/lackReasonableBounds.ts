@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'lackReasonableBounds',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Lack of checks in setters',

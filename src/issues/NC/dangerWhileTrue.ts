@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'dangerWhileTrue',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Dangerous `while(true)` loop',

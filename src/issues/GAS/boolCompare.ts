@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'boolCompare',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Comparing to a Boolean constant',

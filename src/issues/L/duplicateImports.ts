@@ -5,6 +5,7 @@ import util from 'util';
 
 // regex: /(\{\})|(\{ \})/gi,
 const issue: ASTIssue = {
+  id: 'duplicateImports',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Duplicate import statements',

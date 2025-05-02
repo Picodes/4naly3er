@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'keccakOnStructOrArray',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Lack of EIP-712 compliance: using `keccak256()` directly on an array or struct variable',

@@ -15,20 +15,61 @@
   - [Installation](#installation)
   - [Contributing](#contributing)
 
-## Usage
+### Installing 4naly3er
 
-```bash
-yarn analyze <BASE_PATH> <SCOPE_FILE> <GITHUB_URL>
+#### Prerequisites:
 
-# Example
-yarn analyze contracts scope.example.txt
+You must have `node` and `yarn` installed on your system.
+
+#### Installation:
+
+```
+git clone [https://github.com/cb-elileers/analyzer](https://github.cbhq.net/security/solidity-analyzer)
+cd analyzer
+npm i --force --save-dev
+yarn
 ```
 
-- `BASE_PATH` is a relative path to the folder containing the smart contracts.
-- `SCOPE_FILE` is an optional file containing a specific smart contracts scope (see [scope.example.txt](./scope.example.txt))
-- `GITHUB_URL` is an optional url to generate links to github in the report
-- For remappings, add `remappings.txt` to `BASE_PATH`.
-- The output will be saved in a `report.md` file.
+## Using 4naly3er
+
+#### Basic Usage
+
+```
+yarn analyze <BASE_PATH> <OPTIONS>
+```
+
+For example: `yarn analyze ~/Documents/op-enclave/`
+
+**Where Options Are:**
+
+- BASE_PATH is a **required** parameter which points to the folder containing the smart contract project.
+- '-s, --scope scopeFile' .txt file containing the contest scope
+- '-g, --github githubURL' github url to generate links to code
+- '-o, --out reportPath' Path for Markdown report
+- '-l, --listfiles' List analyzed files in Markdown Report
+- '--legacyscope scopeFile' Path for legacy scope file
+- '--sarif [outputPath]' Generate SARIF report, optionally include path to report. Default is analyzer.sarif
+- '--skip-info' Skip info issues
+- '--skip-gas' Skip gas issues
+- '--skip-low' Skip low issues
+- '--skip-medium' Skip medium issues
+- '--skip-high' Skip high issues
+- '--skip, --skip-detectors detectorID' Skip specific detectors by id
+
+For any remappings, Forge can generate, or you can add, remappings.txt to the BASE_PATH and 4naly3er will use them accordingly.
+
+Output from the tool is stored in **report.md** within the 4naly3er folder. To keep all documents related to a project together, it is advisable to run `mv report.md <BASE_PATH>` to deposit the report into the smart contract project's folder. (Click here to see an example report)[https://gist.github.com/Picodes/e9f1bb87ae832695694175abd8f9797f]
+
+#### Scope File Generation
+
+Sometimes, we only want to run our tooling on certain contracts within a repository. To do so, we define those contracts we want to be in scope in a **scope.txt** file.
+
+To autogenerate a scope.txt file that excludes dependencies, we can use the below script:
+
+```
+cd <BASE_PATH>
+find . | grep "\.sol" | grep -v "\./lib/" | grep -v typechain | grep -v node_modules | grep -v artifacts | grep -v "\.t\.sol">scope.txt
+```
 
 ## Example Reports
 

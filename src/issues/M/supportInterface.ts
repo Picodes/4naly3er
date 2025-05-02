@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'supportInterface',
   regexOrAST: 'Regex',
   type: IssueTypes.M,
   title: 'Direct `supportsInterface()` calls may cause caller to revert',

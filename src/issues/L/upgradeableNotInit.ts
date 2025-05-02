@@ -2,6 +2,7 @@ import { IssueTypes, RegexIssue } from '../../types';
 
 //@audit-issue TODO - lots of false positives
 const issue: RegexIssue = {
+  id: 'upgradeableNotInit',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Upgradeable contract not initialized',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'numericTimeDays',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Numeric values having to do with time should use time units for readability',

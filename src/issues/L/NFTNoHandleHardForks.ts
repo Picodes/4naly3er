@@ -4,6 +4,7 @@ import { instanceFromSRC, lineFromIndex } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'nftNoHandleHardForks',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'NFT doesn\'t handle hard forks',

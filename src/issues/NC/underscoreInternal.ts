@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'underscoreInternal',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Internal and private variables and functions names should begin with an underscore',

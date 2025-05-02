@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'criticalChange',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Critical Changes Should Use Two-step Procedure',

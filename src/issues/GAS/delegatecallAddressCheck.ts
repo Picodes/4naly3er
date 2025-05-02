@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'delegatecallAddressCheck',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Avoid contract existence checks by using low level calls',

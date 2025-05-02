@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'pragmaExpDeprecated',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: '`pragma experimental ABIEncoderV2` is deprecated',

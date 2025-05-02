@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'lackSlippage',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Lack of Slippage check',

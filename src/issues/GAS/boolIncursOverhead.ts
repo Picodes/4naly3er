@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'boolIncursOverhead',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Using bools for storage incurs overhead',

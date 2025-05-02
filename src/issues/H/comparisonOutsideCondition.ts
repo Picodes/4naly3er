@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'comparisonOutsideCondition',
   regexOrAST: 'Regex',
   type: IssueTypes.H,
   title: 'Incorrect comparison implementation',

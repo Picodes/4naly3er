@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'uncheckedERC20Transfer',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Return values of `transfer()`/`transferFrom()` not checked',

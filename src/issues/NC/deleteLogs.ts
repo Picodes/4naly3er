@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'deleteLogs',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Delete rogue `console.log` imports',

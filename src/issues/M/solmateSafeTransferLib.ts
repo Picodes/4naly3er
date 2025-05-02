@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'solmateSafeTransferLib',
   regexOrAST: 'Regex',
   type: IssueTypes.M,
   title:

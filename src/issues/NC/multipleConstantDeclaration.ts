@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'multipleConstantDeclaration',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Constant state variables defined more than once',

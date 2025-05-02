@@ -2,6 +2,7 @@ import { IssueTypes, RegexIssue } from '../../types';
 
 //@note there will be false positives
 const issue: RegexIssue = {
+  id: 'precisionLoss',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Loss of precision',

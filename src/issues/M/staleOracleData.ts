@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, lineFromIndex } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'staleOracleData',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: "Chainlink's `latestRoundData` might return stale or incorrect results",

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: '_msgSender',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: "Don't use `_msgSender()` if not supporting EIP-2771",

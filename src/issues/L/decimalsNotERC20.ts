@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'decimalsNotERC20',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: '`decimals()` is not a part of the ERC-20 standard',

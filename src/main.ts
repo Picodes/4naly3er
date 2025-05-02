@@ -1,8 +1,10 @@
-import fs from 'fs';
+import * as fs from 'fs';
 import analyze from './analyze';
+import sarif from './sarif';
 import compileAndBuildAST from './compile';
 import issues from './issues';
-import { InputType, IssueTypes } from './types';
+import markdown from './markdown';
+import { InputType, IssueTypes, Analysis, AnalysisResults, ReportTypes, Issue } from './types';
 import { recursiveExploration } from './utils';
 
 /*   .---. ,--.  ,--  / ,---.   ,--.   ,--.'  ,-. .----. ,------.,------, 
@@ -20,15 +22,20 @@ import { recursiveExploration } from './utils';
  * @param githubLink github url to generate links to code
  * @param out where to save the report
  * @param scope optional text containing the .sol files in scope. Replaces `scopeFile`
+ * @param sarif optional string with location to save sarif report. If undefined, SARIF generation is skipped.
+ * @param listFiles optional boolean, if true list the analyzed files in the markdown report.
  */
 const main = async (
   basePath: string,
   scopeFile: string | null,
   githubLink: string | null,
   out: string,
+  severityToRun: IssueTypes[],
+  skipDetectors: string[],
   scope?: string,
+  sarifOut?: string,
+  listFiles?: boolean,
 ) => {
-  let result = '# Report\n\n';
   let fileNames: string[] = [];
 
   if (!!scopeFile || !!scope) {
@@ -47,13 +54,6 @@ const main = async (
 
   console.log('Scope: ', fileNames);
 
-  // Uncomment next lines to have the list of analyzed files in the report
-
-  // result += '## Files analyzed\n\n';
-  // fileNames.forEach(fileName => {
-  //   result += ` - ${fileName}\n`;
-  // });
-
   // Read file contents and build AST
   const files: InputType = [];
   const asts = await compileAndBuildAST(basePath, fileNames);
@@ -65,15 +65,34 @@ const main = async (
     });
   });
 
-  for (const t of Object.values(IssueTypes)) {
-    result += analyze(
+  let analysisResultsObj: AnalysisResults = {};
+
+  for (const t of severityToRun) {
+    let analyses: Analysis[] = analyze(
       files,
-      issues.filter(i => i.type === t),
+      issues.filter(i => i.type === t && !skipDetectors.includes(i.id.toLowerCase())),
       !!githubLink ? githubLink : undefined,
     );
+
+    // add analyze results for this issue type to the results object
+    analysisResultsObj[t] = analyses;
   }
 
-  fs.writeFileSync(out, result);
+  // Do markdown conversion
+  let markdownResult = markdown(analysisResultsObj, listFiles ? fileNames : undefined, githubLink ?? undefined);
+  fs.writeFileSync(out, markdownResult);
+
+  if(sarifOut){
+    let sarifAnalyses: Analysis[] = [];
+  
+    for (const t of Object.values(IssueTypes)) {
+      sarifAnalyses = sarifAnalyses.concat((analysisResultsObj[t] ?? []));
+    }
+
+    let sarifResult = sarif(sarifAnalyses);
+
+    fs.writeFileSync(sarifOut, JSON.stringify(sarifResult, null, 2), 'utf-8');
+  }
 };
 
 export default main;

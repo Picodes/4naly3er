@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'uncheckedIncrements',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Increments/decrements can be unchecked in for-loops',

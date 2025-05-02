@@ -4,6 +4,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, topLevelFiles } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'uselessInternal',
   regexOrAST: 'AST',
   type: IssueTypes.GAS,
   title: '`internal` functions not called by the contract should be removed',

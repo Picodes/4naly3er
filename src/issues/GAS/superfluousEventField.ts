@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'superfluousEventField',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Superfluous event fields',

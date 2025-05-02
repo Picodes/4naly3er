@@ -5,6 +5,7 @@ import { instanceFromSRC } from '../../utils';
 
 //@note trop fier de moi
 const issue: ASTIssue = {
+  id: 'redundantNamedReturn',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Adding a `return` statement when the function defines a named return variable, is redundant',

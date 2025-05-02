@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'wethHardcode',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'WETH address definition can be use directly',

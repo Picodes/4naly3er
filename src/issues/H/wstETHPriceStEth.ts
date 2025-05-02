@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'wstEthPriceStEth',
   regexOrAST: 'Regex',
   type: IssueTypes.H,
   title: "`wstETH`'s functions operate on units of stEth, not Eth",

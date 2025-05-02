@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'missingEventSetters',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Missing Event for critical parameters change',

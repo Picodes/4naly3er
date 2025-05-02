@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes } from '../../types';
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'multiplicationBeforeDivision',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Precision Loss due to Division before Multiplication',

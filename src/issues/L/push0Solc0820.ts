@@ -3,6 +3,7 @@ import { findAll } from 'solidity-ast/utils';
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'push0Solc0820',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Solidity version 0.8.20+ may not work on other chains due to `PUSH0`',

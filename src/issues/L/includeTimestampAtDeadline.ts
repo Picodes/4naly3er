@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'includeTimestampAtDeadline',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Signature use at deadlines should be allowed',

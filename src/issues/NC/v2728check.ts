@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'v2728check',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'No need to check that `v == 27` or `v == 28` with `ecrecover`',

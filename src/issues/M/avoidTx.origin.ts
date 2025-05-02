@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'avoidTxOrigin',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Use of `tx.origin` is unsafe in almost every context',

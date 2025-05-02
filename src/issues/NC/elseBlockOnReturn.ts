@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'elseBlockOnReturn',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: '`else`-block not required',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'longRevertString',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Reduce the size of error messages (Long revert Strings)',

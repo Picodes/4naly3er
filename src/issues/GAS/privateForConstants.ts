@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'privateForConstants',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Using `private` rather than `public` for constants, saves gas',

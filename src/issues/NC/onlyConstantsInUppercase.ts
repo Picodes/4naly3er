@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'onlyConstantsInUppercase',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Variable names that consist of all capital letters should be reserved for `constant`/`immutable` variables',

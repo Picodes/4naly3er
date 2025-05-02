@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'style',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Function writing that does not comply with the Solidity Style Guide',

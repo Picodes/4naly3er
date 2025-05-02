@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'safeTransferOwnership',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Use `Ownable2Step.transferOwnership` instead of `Ownable.transferOwnership`',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'stringQuote',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Strings should use double quotes rather than single quotes',

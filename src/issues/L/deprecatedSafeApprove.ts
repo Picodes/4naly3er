@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'deprecatedSafeApprove',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: '`safeApprove()` is deprecated',

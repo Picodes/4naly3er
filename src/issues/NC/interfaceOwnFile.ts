@@ -3,6 +3,7 @@ import { findAll } from 'solidity-ast/utils';
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'interfaceOwnFile',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Interfaces should be defined in separate files from their usage',

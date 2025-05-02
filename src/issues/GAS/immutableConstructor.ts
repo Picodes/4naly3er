@@ -4,6 +4,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, topLevelFiles, getStorageVariable } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'immutableConstructor',
   regexOrAST: 'AST',
   type: IssueTypes.GAS,
   title: 'State variables only set in the constructor should be declared `immutable`',

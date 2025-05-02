@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'getDyUnderlyingFlashLoan',
   regexOrAST: 'Regex',
   type: IssueTypes.H,
   title: '`get_dy_underlying()` is not a flash-loan-resistant price',

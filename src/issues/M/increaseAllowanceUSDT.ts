@@ -4,6 +4,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC, topLevelFiles, getStorageVariable } from '../../utils';
 
 const issue: RegexIssue = {
+  id: 'increaseAllowanceUSDT',
   regexOrAST: 'Regex',
   type: IssueTypes.M,
   title: "`increaseAllowance/decreaseAllowance` won't work on mainnet for USDT",

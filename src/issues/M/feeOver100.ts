@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'feeOver100',
   regexOrAST: 'AST',
   type: IssueTypes.M,
   title: 'Fees can be set to be greater than 100%.',

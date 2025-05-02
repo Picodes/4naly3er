@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'functionOrdering',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Function ordering does not follow the Solidity style guide',

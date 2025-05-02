@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'styleGuide',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: "Contract does not follow the Solidity style guide's suggested layout ordering",

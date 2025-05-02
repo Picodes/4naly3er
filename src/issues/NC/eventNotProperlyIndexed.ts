@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'eventNotProperlyIndexed',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Event missing indexed field',

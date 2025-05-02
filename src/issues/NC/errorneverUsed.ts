@@ -4,6 +4,7 @@ import { instanceFromSRC, lineFromIndex } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'errorneverUsed',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Unused `error` definition',

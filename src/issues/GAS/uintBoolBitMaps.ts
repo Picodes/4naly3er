@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'uintBoolBitMaps',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: '`uint256` to `bool` `mapping`: Utilizing Bitmaps to dramatically save on Gas',

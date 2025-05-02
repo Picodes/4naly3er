@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'year365',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'A year is not always 365 days',

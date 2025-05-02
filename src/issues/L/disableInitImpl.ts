@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'disableInitImpl',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Do not leave an implementation contract uninitialized',

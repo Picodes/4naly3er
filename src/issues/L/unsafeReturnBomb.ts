@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'unsafeReturnBomb',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Unsafe solidity low-level call can cause gas grief attack',

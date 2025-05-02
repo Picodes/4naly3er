@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'someERC20TransferRevertsOn0',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Some tokens may revert when zero value transfers are made',

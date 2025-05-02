@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'scientificNotationExponent',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Use scientific notation (e.g. `1e18`) rather than exponentiation (e.g. `10**18`)',

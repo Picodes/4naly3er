@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'missingNatspecParam',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Incomplete NatSpec: `@param` is missing on actually documented functions',

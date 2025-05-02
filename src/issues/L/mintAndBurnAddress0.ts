@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'mintAndBurnAddress0',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Prevent accidentally burning tokens',

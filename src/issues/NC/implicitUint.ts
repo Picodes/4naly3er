@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'implicitUint',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Change uint to uint256',

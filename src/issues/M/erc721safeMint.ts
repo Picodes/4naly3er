@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'erc721safeMint',
   regexOrAST: 'Regex',
   type: IssueTypes.M,
   title: '`_safeMint()` should be used rather than `_mint()` wherever possible',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'thisExternal',
   regexOrAST: 'Regex',
   type: IssueTypes.GAS,
   title: 'Use of `this` instead of marking as `public` an `external` function',

@@ -5,6 +5,7 @@ import util from 'util';
 
 // regex: /(\{\})|(\{ \})/gi,
 const issue: ASTIssue = {
+  id: 'emptyFallbackRequire',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Empty `receive()/payable fallback()` function does not authenticate requests',

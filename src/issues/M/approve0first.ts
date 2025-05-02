@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'approve0first',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: "`approve()`/`safeApprove()` may revert if the current approval is not zero",

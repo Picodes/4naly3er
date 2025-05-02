@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { getStorageVariable, instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'address0Check',
   regexOrAST: 'AST',
   type: IssueTypes.L,
   title: 'Missing checks for `address(0)` when assigning values to address state variables',

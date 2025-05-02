@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'possibleRounding',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Possible rounding issue',

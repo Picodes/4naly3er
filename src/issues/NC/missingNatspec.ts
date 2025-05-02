@@ -4,6 +4,7 @@ import { instanceFromSRC } from '../../utils';
 import util from 'util';
 
 const issue: ASTIssue = {
+  id: 'missingNatspec',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'NatSpec is completely non-existent on functions that should have them',

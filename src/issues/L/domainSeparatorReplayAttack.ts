@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'domainSeparatorReplayAttack',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: '`domainSeparator()` isn\'t protected against replay attacks in case of a future chain split ',

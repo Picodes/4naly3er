@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'assertRequire',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: '`require()` should be used instead of `assert()`',

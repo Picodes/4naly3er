@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'frontRunnableInitializer',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Initializers could be front-run',

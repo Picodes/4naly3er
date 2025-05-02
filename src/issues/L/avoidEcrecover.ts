@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'avoidEcrecover',
   regexOrAST: 'Regex',
   type: IssueTypes.L,
   title: 'Use of `ecrecover` is susceptible to signature malleability',

@@ -3,6 +3,7 @@ import { ASTIssue, InputType, Instance, IssueTypes, RegexIssue } from '../../typ
 import { getStorageVariable, instanceFromSRC } from '../../utils';
 
 const issue: ASTIssue = {
+  id: 'arrayIndices',
   regexOrAST: 'AST',
   type: IssueTypes.NC,
   title: 'Array indices should be referenced via `enum`s rather than via numeric literals',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'uselessZeroInit',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Variables need not be initialized to zero',

@@ -1,6 +1,7 @@
 import { IssueTypes, RegexIssue } from '../../types';
 
 const issue: RegexIssue = {
+  id: 'defaultVisibility',
   regexOrAST: 'Regex',
   type: IssueTypes.NC,
   title: 'Default Visibility for constants',
